@@ -1,12 +1,12 @@
-import Head from "next/head";
-import { renderMetaTags, useQuerySubscription } from "react-datocms";
-import Container from "../components/container";
-import HeroPost from "../components/hero-post";
-import Intro from "../components/intro";
-import Layout from "../components/layout";
-import MoreStories from "../components/more-stories";
-import { request } from "../lib/datocms";
-import { metaTagsFragment, responsiveImageFragment } from "../lib/fragments";
+import Head from 'next/head'
+import { renderMetaTags, useQuerySubscription } from 'react-datocms'
+import Container from '../components/container'
+import HeroPost from '../components/hero-post'
+import Intro from '../components/intro'
+import Layout from '../components/layout'
+import MoreStories from '../components/more-stories'
+import { request } from '../lib/datocms'
+import { metaTagsFragment, responsiveImageFragment } from '../lib/fragments'
 
 export async function getStaticProps({ preview }) {
   const graphqlRequest = {
@@ -45,7 +45,7 @@ export async function getStaticProps({ preview }) {
       ${responsiveImageFragment}
     `,
     preview,
-  };
+  }
 
   return {
     props: {
@@ -53,7 +53,7 @@ export async function getStaticProps({ preview }) {
         ? {
             ...graphqlRequest,
             initialData: await request(graphqlRequest),
-            token: process.env.NEXT_EXAMPLE_CMS_DATOCMS_API_TOKEN,
+            token: process.env.DATOCMS_API_TOKEN,
             environment: process.env.NEXT_DATOCMS_ENVIRONMENT || null,
           }
         : {
@@ -61,17 +61,17 @@ export async function getStaticProps({ preview }) {
             initialData: await request(graphqlRequest),
           },
     },
-  };
+  }
 }
 
 export default function Index({ subscription }) {
   const {
     data: { allPosts, site, blog },
-  } = useQuerySubscription(subscription);
+  } = useQuerySubscription(subscription)
 
-  const heroPost = allPosts[0];
-  const morePosts = allPosts.slice(1);
-  const metaTags = blog.seo.concat(site.favicon);
+  const heroPost = allPosts[0]
+  const morePosts = allPosts.slice(1)
+  const metaTags = blog.seo.concat(site.favicon)
 
   return (
     <>
@@ -93,5 +93,5 @@ export default function Index({ subscription }) {
         </Container>
       </Layout>
     </>
-  );
+  )
 }

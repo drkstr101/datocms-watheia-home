@@ -1,11 +1,13 @@
 require('dotenv').config()
 
-module.exports = {
+const nextConfig = {
   future: {
     webpack5: true,
   },
   env: {
-    NEXT_EXAMPLE_CMS_DATOCMS_API_TOKEN:
-      process.env.NEXT_EXAMPLE_CMS_DATOCMS_API_TOKEN,
+    DATOCMS_API_TOKEN: process.env.DATOCMS_API_TOKEN,
   },
 }
+
+const withImages = require('next-images')
+module.exports = withImages(nextConfig)
